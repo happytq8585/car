@@ -7,6 +7,8 @@ struct Info
 {
     Info(char*, int size, const char* delim);
     int toString(char*, int bufSize, char c);
+    void display(char* buf=NULL, int size=0);
+    int update(const Info* ptr) { *this = *ptr; }
     static const int N = 64;
     int valid; // 0=invalid  1=invalid
     int id; //car id

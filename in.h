@@ -22,46 +22,44 @@ public:
         if_des_.close();
         if_up_.close();
     }
-    int in_des(std::list<T*>& lst) {
-        std::string line;
-        while (getline(if_des_, line)) {
-            char origin[1024] = {0};
-            strncpy(origin, line.c_str(), line.size());
-            T t(origin, line.size(), "\t");
-            if (t.valid == 1) {
-                T* pt = new T(t);
-                lst.push_back(pt);
-            }
-            /*
-            char buf[1024];
-            t.toString(buf, sizeof(buf), '\t');
-            printf("%s\n", buf);
-            */
-        }
-        return 0;
-    }
-    int in_update(std::list<T*>& lst) {
-        std::string line;
-        while (getline(if_up_, line)) {
-            char origin[1024] = {0};
-            strncpy(origin, line.c_str(), line.size());
-            T t(origin, line.size(), "\t");
-            if (t.valid == 1) {
-                T* pt = new T(t);
-                lst.push_back(pt);
-            }
-            /*
-            char buf[1024];
-            t.toString(buf, sizeof(buf), '\t');
-            printf("%s\n", buf);
-            */
-        }
-        return 0;
-    }
+    T* in_des();
+    T* in_update();
 private:
     std::ifstream if_des_;
     std::ifstream if_up_;
     char des_[N];
     char update_[N];
 };
+template<class T>
+T* In<T>::in_des()
+{
+    std::string line;
+    if (!getline(if_des_, line)) {
+        return NULL;
+    }
+    char origin[1024] = {0};
+    strncpy(origin, line.c_str(), line.size());
+    T t(origin, line.size(), "\t");
+    if (t.valid == 1) {
+        T* pt = new T(t);
+        return pt;
+    }
+    return NULL;
+}
+template<class T>
+T* In<T>::in_update()
+{
+    std::string line;
+    if (!getline(if_up_, line)) {
+        return NULL;
+    }
+    char origin[1024] = {0};
+    strncpy(origin, line.c_str(), line.size());
+    T t(origin, line.size(), "\t");
+    if (t.valid == 1) {
+        T* pt = new T(t);
+        return pt;
+    }
+    return NULL;
+}
 #endif

@@ -7,9 +7,12 @@ using namespace std;
 
 static void display(Info*& ptr)
 {
+    ptr->display();
+    /*
     char buf[1024];
     ptr->toString(buf, sizeof(buf), '\t');
     printf("%s\n", buf);
+    */
 }
 
 int Operations::query_all()
