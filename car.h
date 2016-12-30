@@ -1,0 +1,36 @@
+#ifndef __CAR_H__
+#define __CAR_H__
+
+struct Info
+{
+    Info(char buf[], int size);
+    int toString(char buf[], int bufSize);
+    static const int N = 64;
+    int valid; // 0=invalid  1=invalid
+    int id; //car id
+    char number[N]; //car number
+    char company[N]; //made in which company
+    struct {
+        time_t t; //when buy this car in seconds from 1970-1-1 00:00:00
+        char str[N]; //transfer seconds into strings
+    } time;
+    struct {
+        char name[N];
+        int  type; //0=big, 1=small, 2=truck
+    } type;
+    int distance;
+    int distance_price;
+    int maintain_price;
+    int road_price;
+    int total_price;
+    union {
+        int number_capacity; //for big car
+        int number_unit; //for small car
+        int total_weight; //for truck
+    } extra_info;
+};
+class Car
+{
+};
+
+#endif
