@@ -3,6 +3,7 @@
 #include <string.h>
 #include <iostream>
 #include <fstream>
+#include <list>
 #include "car.h"
 
 template<class T>
@@ -21,27 +22,39 @@ public:
         if_des_.close();
         if_up_.close();
     }
-    int in_des() {
+    int in_des(std::list<T*>& lst) {
         std::string line;
         while (getline(if_des_, line)) {
             char origin[1024] = {0};
             strncpy(origin, line.c_str(), line.size());
             T t(origin, line.size(), "\t");
+            if (t.valid == 1) {
+                T* pt = new T(t);
+                lst.push_back(pt);
+            }
+            /*
             char buf[1024];
             t.toString(buf, sizeof(buf), '\t');
             printf("%s\n", buf);
+            */
         }
         return 0;
     }
-    int in_update() {
+    int in_update(std::list<T*>& lst) {
         std::string line;
         while (getline(if_up_, line)) {
             char origin[1024] = {0};
             strncpy(origin, line.c_str(), line.size());
             T t(origin, line.size(), "\t");
+            if (t.valid == 1) {
+                T* pt = new T(t);
+                lst.push_back(pt);
+            }
+            /*
             char buf[1024];
             t.toString(buf, sizeof(buf), '\t');
             printf("%s\n", buf);
+            */
         }
         return 0;
     }

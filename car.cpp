@@ -91,5 +91,6 @@ int Info::toString(char *buf, int size, char c)
     n += snprintf(buf+n, size-n, "%s%c%d%c", type.name, c, type.type, c);
     n += snprintf(buf+n, size-n, "%d%c%d%c%d%c", distance, c, distance_price, c, maintain_price, c);
     n += snprintf(buf+n, size-n, "%d%c%d%c%d%c", road_price, c, total_price, c, extra_info.number_unit, c);
+    buf[n] = '\0';
     return n;
 }
