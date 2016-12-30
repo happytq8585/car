@@ -1,10 +1,12 @@
 #ifndef __CAR_H__
 #define __CAR_H__
 
+#include <time.h>
+
 struct Info
 {
-    Info(char buf[], int size);
-    int toString(char buf[], int bufSize);
+    Info(char*, int size, const char* delim);
+    int toString(char*, int bufSize, char c);
     static const int N = 64;
     int valid; // 0=invalid  1=invalid
     int id; //car id
