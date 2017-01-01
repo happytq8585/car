@@ -4,17 +4,15 @@
 
 using namespace std;
 
-Store::Store(const char* des, const char* update):
-    of_des_(des, ios::app), of_up_(update, ios::app)
+Store::Store(const char* des):
+    of_des_(des, ios::app)
 {
     strncpy(des_, des, sizeof(des_));
-    strncpy(update_, update, sizeof(update_));
 }
 
 Store::~Store()
 {
     of_des_.close();
-    of_up_.close();
 }
 int Store::store(const char* line)
 {
@@ -22,8 +20,12 @@ int Store::store(const char* line)
     return 0;
 }
 
-int Store::update(const char* line)
+int Store::operator()(Info* ptr)
 {
-    of_up_ << line << endl;
-    return 0;
+    if (ptr->valid == 0) {
+        return -1;
+    }
+    char buf[1024] = {0};
+    ptr->toString(buf, sizeof(buf), '\t');
+    return store(buf);
 }

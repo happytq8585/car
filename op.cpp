@@ -21,3 +21,27 @@ int Operations::query_all()
     for_each(lst.begin(), lst.end(), display);
     return 0;
 }
+int Operations::query_one(int id)
+{
+    Info* ptr = cache.query_one(id);
+    if (ptr == NULL) {
+        return -1;
+    }
+    ptr->display();
+    return 0;
+}
+
+int Operations::add_one(Info& e)
+{
+    return cache.add(&e);
+}
+
+int Operations::del_one(int id)
+{
+    return cache.del(id);
+}
+
+int Operations::modify(Info& e)
+{
+    return cache.update(&e);
+}

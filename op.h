@@ -6,13 +6,13 @@
 class Operations
 {
 public:
-    Operations(const char* des, const char* update):cache(des, update){}
+    Operations(const char* des):cache(des){}
     int query_all();
-    int query_one();
+    int query_one(int id);
 
-    int add_one();
-    int del_one();
-    int edit_one();
+    int add_one(Info& e);
+    int del_one(int id);
+    int modify(Info& e);
 private:
     Cache<Info> cache;
 };

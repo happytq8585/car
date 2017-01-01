@@ -2,18 +2,18 @@
 #define __STORE_H__
 #include <fstream>
 
+#include "car.h"
+
 class Store
 {
     static const int N = 64;
 public:
-    Store(const char* des, const char* update);
+    Store(const char* des);
     ~Store();
     int store(const char* line);
-    int update(const char* line);
+    int operator()(Info* ptr);
 private:
     std::ofstream of_des_;
-    std::ofstream of_up_;
     char des_[N];
-    char update_[N];
 };
 #endif
