@@ -33,16 +33,16 @@ static int del(Operations& op, int id)
 static int add_or_modify(Operations& op, int type=0)
 {//type == 0 add;  type == 1 modify
     char tok[13][32] = {0};
-    printf("input car id:");
+    printf("input car id:\n");
     scanf("%s", tok[0]);
-    printf("input car number:");
+    printf("input car number:\n");
     scanf("%s", tok[1]);
-    printf("input company:");
+    printf("input company:\n");
     scanf("%s", tok[2]);
-    printf("input time:");
+    printf("input time:\n");
     strcpy(tok[3], "000");
     scanf("%s", tok[4]);
-    printf("input type: big small or truck");
+    printf("input type: big small or truck:\n");
     scanf("%s", tok[5]);
     if (strcmp(tok[5], "big") == 0) {
         strcpy(tok[6], "0");
@@ -53,24 +53,24 @@ static int add_or_modify(Operations& op, int type=0)
     } else {
         strcpy(tok[6], "3");
     }
-    printf("input distance:");
+    printf("input distance:\n");
+    scanf("%s", tok[7]);
+    printf("input distance_price:\n");
     scanf("%s", tok[8]);
-    printf("input distance_price:");
-    scanf("%s", tok[8]);
-    printf("input maintain_price:");
+    printf("input maintain_price:\n");
     scanf("%s", tok[9]);
-    printf("input road_price:");
+    printf("input road_price:\n");
     scanf("%s", tok[10]);
-    printf("input total_price:");
+    printf("input total_price:\n");
     scanf("%s", tok[11]);
-    printf("input extra_info:");
+    printf("input extra_info:\n");
     scanf("%s", tok[12]);
     char buf[1024] = {0};
     int i = 0, n = 0;
     for (; i < 12; ++i) {
-        n += snprintf(buf, sizeof(buf)-n, "%s%c", tok[i], '\t');
+        n += snprintf(buf+n, sizeof(buf)-n, "%s%c", tok[i], '\t');
     }
-    n += snprintf(buf, sizeof(buf)-n, "%s", tok[12]);
+    n += snprintf(buf+n, sizeof(buf)-n, "%s", tok[12]);
     Info info(buf, n, "\t");
     if (info.valid == 0) {
         printf("input is invalid!\n");
@@ -113,7 +113,9 @@ static int start_daemon()
     while (1) {
         printf("input selection: 1=add 2=del 3=modify 4=query_one 5=queyr_all other=exit\n");
         int a;
-        scanf("%d", &a);
+        if (scanf("%d", &a) < 1) {
+            return 0;
+        }
         switch(a)
         {
             case 1:

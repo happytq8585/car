@@ -33,8 +33,5 @@ struct Info
         int total_weight; //for truck
     } extra_info;
 };
-class Car
-{
-};
 
 #endif

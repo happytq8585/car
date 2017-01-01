@@ -1,0 +1,17 @@
+daemon程序在daemon.cpp文件中
+在linux下编译命令用：
+      g++ -o main *.cpp -g
+运行：
+      ./main
+
+文件说明：
+des.txt：为保存汽车信息，每一个汽车字段信息需用\t分割，当手动添加到des.txt文件中时，注意字段的意义，
+         比如，如果是需要数字类型，实际却输入了一个非数字类型，这样会添加失败的
+store.h：专门负责存储汽车信息到des.txt文件中
+in.h:    专门负责读取des.txt文件中的内容到cache中
+cache.h: 专门负责保存所有汽车信息，存放在内存中且用链表方式存储
+op.h：   专门负责向上层提供接口信息(add delete modify query)
+car.h:   专门负责定义汽车各个字段信息
+daemon.cpp: 自己定义的一个daemon程序
+
+HAVE FUN!!!

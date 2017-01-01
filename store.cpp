@@ -5,7 +5,7 @@
 using namespace std;
 
 Store::Store(const char* des):
-    of_des_(des, ios::app)
+    of_des_(des, ios::trunc)
 {
     strncpy(des_, des, sizeof(des_));
 }

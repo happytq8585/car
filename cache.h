@@ -53,21 +53,28 @@ class Cache
     int add(T* ptr);
     int del(int id);
     T* query_one(int id);
+    void dump();
     ~Cache()
     {
-        typename std::list<T*>::iterator it;
-        Store s(name_);
-        for (it = lst_.begin(); it != lst_.end(); ++it) {
-            char buf[1024] = {0};
-            (*it)->toString(buf, sizeof(buf), '\t');
-            s.store(buf);
-        }
+        dump();
         std::for_each(lst_.begin(), lst_.end(), clear());
     }
     std::list<T*> lst_;
     std::list<int> unique_;
     char name_[128];
 };
+
+template<class T>
+void Cache<T>::dump()
+{
+    typename std::list<T*>::iterator it;
+    Store s(name_);
+    for (it = lst_.begin(); it != lst_.end(); ++it) {
+        char buf[1024] = {0};
+        (*it)->toString(buf, sizeof(buf), '\t');
+        s.store(buf);
+    }
+}
 
 template<class T>
 int Cache<T>::is_uniq(T* ptr)
@@ -82,6 +89,7 @@ int Cache<T>::update(T* ptr)
         find_if(lst_.begin(), lst_.end(), IF(ptr->id));
     if (it != lst_.end()) {
         (*it)->update(ptr);
+        dump();
         return 0;
     }
     return -1;
@@ -94,6 +102,7 @@ int Cache<T>::add(T* ptr)
     }
     lst_.push_back(new T(*ptr));
     unique_.push_back(ptr->id);
+    dump();
     return 0;
 }
 template<class T>
@@ -103,6 +112,7 @@ int Cache<T>::del(int id)
         find_if(lst_.begin(), lst_.end(), IF(id));
     if (it != lst_.end()) {
         lst_.erase(it);
+        dump();
         return 0;
     }
     return -1;
