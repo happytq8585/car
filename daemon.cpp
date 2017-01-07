@@ -93,7 +93,7 @@ static int add_or_modify(Operations& op, int type=0)
         else if (type == 1) {
             r = op.modify(info);
             if (r < 0) {
-                printf("this car id does not exist!\n");
+                printf("this car infomation is invalid or id does not exist!\n");
                 return -1;
             }
             else

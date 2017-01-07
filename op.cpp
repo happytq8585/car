@@ -43,5 +43,8 @@ int Operations::del_one(int id)
 
 int Operations::modify(Info& e)
 {
+    if (!e.valid) {
+        return -1;
+    }
     return cache.update(&e);
 }
